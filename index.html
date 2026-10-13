@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZENITH | Web3 Developer & Community Builder</title>
+
+<meta name="description" content="Zenith is a Full-Stack Web3 Developer, blockchain builder, crypto community manager and project strategist.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --black: #080808;
+  --panel: #111111;
+  --gold: #d4af37;
+  --white: #f5f5f5;
+  --muted: #a3a3a3;
+  --border: rgba(212,175,55,.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(1120px, 90%);
+  margin: auto;
+}
+
+.gold { color: var(--gold); }
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8,8,8,.92);
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--border);
+}
+
+nav {
+  min-height: 76px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+}
+
+.logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.logo span { color: var(--gold); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  font-size: .88rem;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.btn {
+  display: inline-block;
+  padding: 12px 21px;
+  border: 1px solid var(--gold);
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: .88rem;
+  transition: .3s;
+  cursor: pointer;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: #080808;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(212,175,55,.18);
+}
+
+.btn-outline {
+  color: var(--white);
+  background: transparent;
+}
+
+.menu-btn {
+  display: none;
+  border: 1px solid var(--border);
+  color: var(--gold);
+  background: transparent;
+  padding: 8px 12px;
+  font-size: 1.3rem;
+}
+
+.hero {
+  min-height: 650px;
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  align-items: center;
+  gap: 40px;
+  padding-top: 75px;
+  padding-bottom: 85px;
+  position: relative;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background: rgba(212,175,55,.08);
+  filter: blur(110px);
+  right: 5%;
+  top: 20%;
+  pointer-events: none;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  background: rgba(212,175,55,.04);
+  padding: 7px 13px;
+  border-radius: 30px;
+  font-size: .75rem;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 12px var(--gold);
+}
+
+h1, h2, h3 {
+  font-family: 'Space Grotesk', sans-serif;
+  line-height: 1.15;
+}
+
+h1 {
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  letter-spacing: -3px;
+  margin-bottom: 25px;
+}
+
+.hero p {
+  color: var(--muted);
+  max-width: 570px;
+  margin-bottom: 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 330px;
+  position: relative;
+}
+
+.orb {
+  width: min(310px, 75vw);
+  aspect-ratio: 1;
+  border: 1px solid rgba(212,175,55,.6);
+  border-radius: 50%;
+  position: relative;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(212,175,55,.17), transparent 40%),
+    radial-gradient(circle, #16130b, #080808 68%);
+  box-shadow: 0 0 80px rgba(212,175,55,.09),
+              inset 0 0 50px rgba(212,175,55,.08);
+  animation: float 5s ease-in-out infinite;
+}
+
+.orb::before, .orb::after {
+  content: "";
+  position: absolute;
+  width: 125%;
+  height: 45%;
+  border: 1px solid rgba(212,175,55,.65);
+  border-radius: 50%;
+  transform: rotate(-35deg);
+}
+
+.orb::after {
+  transform: rotate(55deg);
+  width: 90%;
+  height: 125%;
+}
+
+.orb-core {
+  width: 115px;
+  height: 115px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #f4d77a, #a47a14, #f9e7a4);
+  color: #080808;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  box-shadow: 0 0 50px rgba(212,175,55,.3);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+.capabilities {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: #0d0d0d;
+}
+
+.cap-list {
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  color: #d2d2d2;
+  font-size: .78rem;
+  letter-spacing: 1px;
+}
+
+.cap-list span::before {
+  content: "✦ ";
+  color: var(--gold);
+}
+
+section {
+  padding: 100px 0;
+  scroll-margin-top: 75px;
+}
+
+.section-label {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: .75rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  margin-bottom: 20px;
+}
+
+.section-desc {
+  color: var(--muted);
+  max-width: 650px;
+  margin-bottom: 45px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 65px;
+  align-items: center;
+}
+
+.about-box {
+  padding: 35px;
+  background: linear-gradient(145deg, #151515, #0b0b0b);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.about-box h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.about-box p, .about-copy {
+  color: var(--muted);
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.skill {
+  color: var(--gold);
+  border: 1px solid var(--border);
+  background: rgba(212,175,55,.05);
+  padding: 7px 12px;
+  border-radius: 4px;
+  font-size: .78rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  padding: 28px;
+  border: 1px solid #252525;
+  border-radius: 9px;
+  background: linear-gradient(145deg, #131313, #0b0b0b);
+  transition: .3s;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+  border-color: var(--gold);
+  box-shadow: 0 15px 35px rgba(212,175,55,.06);
+}
+
+.card-icon {
+  font-size: 1.9rem;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 13px;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.project-number {
+  font-size: .75rem;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 22px;
+}
+
+.project-card {
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--gold);
+  font-size: .85rem;
+}
+
+.roles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.role {
+  padding: 24px;
+  border-left: 2px solid var(--gold);
+  background: #101010;
+}
+
+.role h3 { margin-bottom: 8px; }
+.role p { color: var(--muted); font-size: .9rem; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 35px;
+}
+
+.stat {
+  padding: 25px;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.stat strong {
+  display: block;
+  color: var(--gold);
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.stat span {
+  color: var(--muted);
+  font-size: .85rem;
+}
+
+.contact {
+  text-align: center;
+  background: radial-gradient(ellipse at center, #1c180c 0%, #080808 65%);
+  border-top: 1px solid var(--border);
+}
+
+.contact .section-desc {
+  margin: 0 auto 30px;
+}
+
+.socials {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+footer {
+  border-top: 1px solid #202020;
+  padding: 25px 0;
+  color: var(--muted);
+  font-size: .8rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 800px) {
+  .menu-btn { display: block; }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 76px;
+    left: 0;
+    width: 100%;
+    background: #0b0b0b;
+    padding: 25px 5%;
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .nav-links.open { display: flex; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 70px;
+  }
+
+  .hero p { margin-left: auto; margin-right: auto; }
+  .hero-buttons { justify-content: center; }
+  .hero-visual { min-height: 300px; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 30px; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .roles { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 520px) {
+  section { padding: 70px 0; }
+  .grid, .stats { grid-template-columns: 1fr; }
+  h1 { letter-spacing: -1.5px; }
+  .cap-list { justify-content: center; }
+  .about-box { padding: 25px; }
+  .footer-content { flex-direction: column; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <nav class="container">
+    <a href="#home" class="logo">ZENI<span>TH.</span></a>
+
+    <button class="menu-btn" id="menuBtn"
+      aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Expertise</a>
+      <a href="#projects">Projects</a>
+      <a href="#community">Community</a>
+      <a href="#contact" class="btn btn-gold">Let's Build ↗</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero container" id="home">
+  <div class="reveal">
+    <div class="status"><span class="dot"></span> BUILDING IN WEB3</div>
+
+    <h1>Building the Future of <span class="gold">Web3.</span></h1>
+
+    <p>
+      Full-stack Web3 developer, blockchain builder, and crypto community
+      strategist. I turn ambitious ideas into powerful digital experiences
+      and help Web3 communities grow.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#projects" class="btn btn-gold">Explore My Work ↗</a>
+      <a href="#contact" class="btn btn-outline">Let's Collaborate</a>
+    </div>
+  </div>
+
+  <div class="hero-visual reveal" aria-label="Abstract gold blockchain sphere">
+    <div class="orb">
+      <div class="orb-core">Z</div>
+    </div>
+  </div>
+</section>
+
+<div class="capabilities">
+  <div class="container cap-list">
+    <span>SMART CONTRACTS</span>
+    <span>FRONTEND & BACKEND</span>
+    <span>BLOCKCHAIN</span>
+    <span>WEB3 STRATEGY</span>
+    <span>COMMUNITY</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="container about-grid">
+    <div class="reveal">
+      <div class="section-label">01 / About Me</div>
+      <h2 class="section-title">Code meets <span class="gold">community.</span></h2>
+      <p class="about-copy">
+        I work at the intersection of technology, creativity, and community.
+        My goal is to help Web3 projects move from an idea to a useful product
+        with a strong identity and an engaged community.
+        <br><br>
+        From building interfaces and integrating blockchain features to
+        coordinating project activities and hosting community conversations,
+        I bring a product-focused mindset to every collaboration.
+      </p>
+
+      <div class="skills">
+        <span class="skill">Web3</span>
+        <span class="skill">Robinhood</span>
+        <span class="skill">BNB</span>
+        <span class="skill">Solidity</span>
+        <span class="skill">Ethereum</span>
+        <span class="skill">Solana</span>
+        <span class="skill">Community Strategy</span>
+      </div>
+    </div>
+
+    <div class="about-box reveal">
+      <div class="section-label">THE MISSION</div>
+      <h3>Build useful things.<br>Grow strong communities.</h3>
+      <p>
+        Technology creates the product. People give it life. I combine
+        technical development with community-focused thinking to help
+        ambitious Web3 ideas find their place in the ecosystem.
+      </p>
+      <br>
+      <a href="#contact" class="project-link">Have a project in mind? Let's talk ↗</a>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-label">02 / Expertise</div>
+    <h2 class="section-title">What I <span class="gold">Bring to the Table.</span></h2>
+    <p class="section-desc">
+      Technical execution and project coordination for the decentralized
+      internet.
+    </p>
+
+    <div class="grid">
+      <article class="card reveal">
+        <span class="card-icon">⛓</span>
+        <h3>Smart Contracts</h3>
+        <p>
+          Blockchain contract development, contract integrations, and
+          on-chain functionality for Web3 products.
+        </p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-icon">⌘</span>
+        <h3>Full-Stack Development</h3>
+        <p>
+          Responsive frontends, backend integrations, APIs, and complete
+          web experiences for crypto projects.
+        </p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-icon">◈</span>
+        <h3>Blockchain Integration</h3>
+        <p>
+          Wallet connections, transaction interfaces, and blockchain
+          interactions for decentralized applications.
+        </p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-icon">◉</span>
+        <h3>Project Management</h3>
+        <p>
+          Organizing tasks, coordinating contributors, tracking milestones,
+          and helping teams execute their plans.
+        </p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-icon">◎</span>
+        <h3>Community Management</h3>
+        <p>
+          Community engagement, moderation, announcements, and creating
+          welcoming spaces for Web3 users.
+        </p>
+      </article>
+
+      <article class="card reveal">
+        <span class="card-icon">🎙</span>
+        <h3>X Space Hosting</h3>
+        <p>
+          Hosting conversations, moderating discussions, and connecting
+          founders, builders, and community members.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-label">03 / Selected Work</div>
+    <h2 class="section-title">Ideas turned into <span class="gold">products.</span></h2>
+    <p class="section-desc">
+      A showcase of Web3 development concepts and projects. Replace these
+      examples with your real projects and working links.
+    </p>
+
+    <div class="grid">
+      <article class="card project-card reveal">
+        <div>
+          <div class="project-number">PROJECT / 001</div>
+          <h3>Web3 Ecosystem</h3>
+          <p>
+            A decentralized project website with wallet integration,
+            digital ownership features, and a modern interface.
+          </p>
+        </div>
+        <a href="#contact" class="project-link">Discuss a similar project ↗</a>
+      </article>
+
+      <article class="card project-card reveal">
+        <div>
+          <div class="project-number">PROJECT / 002</div>
+          <h3>Crypto Analytics</h3>
+          <p>
+            A dashboard concept for presenting blockchain data,
+            token activity, and market insights.
+          </p>
+        </div>
+        <a href="#contact" class="project-link">Discuss a similar project ↗</a>
+      </article>
+
+      <article class="card project-card reveal">
+        <div>
+          <div class="project-number">PROJECT / 003</div>
+          <h3>Token Community</h3>
+          <p>
+            A community-focused crypto project combining digital branding,
+            communication, and project coordination.
+          </p>
+        </div>
+        <a href="#contact" class="project-link">Discuss a similar project ↗</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="community">
+  <div class="container">
+    <div class="section-label">04 / Beyond Development</div>
+    <h2 class="section-title">Building more than <span class="gold">code.</span></h2>
+    <p class="section-desc">
+      Successful Web3 projects need more than technology. They need
+      communication, coordination, and people who believe in the mission.
+    </p>
+
+    <div class="roles">
+      <article class="role reveal">
+        <h3>🎙 X Space Host</h3>
+        <p>
+          Guiding engaging discussions, interviewing guests, and creating
+          conversations around Web3 ideas and projects.
+        </p>
+      </article>
+
+      <article class="role reveal">
+        <h3>📢 Community Manager</h3>
+        <p>
+          Helping communities stay informed, engaged, organized, and
+          connected to the project's goals.
+        </p>
+      </article>
+
+      <article class="role reveal">
+        <h3>📋 Project Manager</h3>
+        <p>
+          Coordinating workflows, organizing deliverables, and helping
+          teams turn plans into completed work.
+        </p>
+      </article>
+
+      <article class="role reveal">
+        <h3>🚀 Web3 Growth & Launch Support</h3>
+        <p>
+          Supporting launches through digital experiences, community
+          coordination, project communications, and execution.
+        </p>
+      </article>
+    </div>
+
+    <div class="stats">
+      <div class="stat reveal">
+        <strong>BUILD</strong>
+        <span>Develop with purpose</span>
+      </div>
+      <div class="stat reveal">
+        <strong>CONNECT</strong>
+        <span>Bring communities together</span>
+      </div>
+      <div class="stat reveal">
+        <strong>EXECUTE</strong>
+        <span>Turn ideas into action</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container reveal">
+    <div class="section-label">05 / Get in Touch</div>
+    <h2 class="section-title">Let's build something <span class="gold">remarkable.</span></h2>
+    <p class="section-desc">
+      Have a Web3 product to develop, a community to grow, or a project
+      that needs direction? Let's make it happen.
+    </p>
+
+    <div class="socials">
+      <!-- Replace the placeholder links with your real accounts. -->
+      <a href="https://x.com/@Zenithofweb3" target="_blank" rel="noopener noreferrer"
+         class="btn btn-gold">Connect on X ↗</a>
+
+      <a href="https://t.me/@therealzenithofweb03" target="_blank" rel="noopener noreferrer"
+         class="btn btn-outline">Telegram ↗</a>
+
+      <a href="mailto:zenithofweb03@gmail.com" class="btn btn-outline">
+        Send an Email ↗
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer-content">
+    <a href="#home" class="logo">ZENI<span>TH.</span></a>
+    <p>Building on-chain. Connecting people. Creating impact.</p>
+    <p>© <span id="year"></span> Zenith. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+
+menuBtn.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", isOpen);
+  menuBtn.textContent = isOpen ? "✕" : "☰";
+});
+
+document.querySelectorAll("#navLinks a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded", "false");
+    menuBtn.textContent = "☰";
+  });
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(element => {
+  observer.observe(element);
+});
+</script>
+
